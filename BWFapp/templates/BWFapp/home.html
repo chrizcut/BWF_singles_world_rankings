@@ -1,5 +1,14 @@
 {% extends 'BWFapp/base.html' %}
+{% load static %}
 
 {% block content %}
-Here is an app.
+<div class="text-center">
+    <img src="{% static 'BWFapp/2012_BWF_logo.png' %}" width="300">
+</div>
+
+
+<div class="text-center">
+    This app displays the top 100 men's and women's singles badminton players at the time tournamentsoftware was scraped, along with pie charts showing the distribution of their countries.
+</div>
+
 {% endblock %}

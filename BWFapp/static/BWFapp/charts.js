@@ -41,7 +41,7 @@ options: {
     plugins: {
         title: {
             display: true,
-            text: "Number of women's singles player per country"
+            text: "Number of women's singles players per country"
         }
     }
 }
@@ -64,7 +64,7 @@ options: {
     plugins: {
         title: {
             display: true,
-            text: "Number of men's singles player per country"
+            text: "Number of men's singles players per country"
         }
     }
 }

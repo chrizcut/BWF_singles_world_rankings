@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "BWFAPI",
+    "rest_framework",
     "BWFapp",
     "django.contrib.admin",
     "django.contrib.auth",

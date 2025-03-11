@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from BWFapp import views
 from . import settings
 from django.conf.urls.static import static
@@ -27,4 +27,5 @@ urlpatterns = [
     path("womens_singles/", views.womens_singles, name="womens_singles"),
     path("mens_singles/", views.mens_singles, name="mens_singles"),
     path("singles_charts/", views.singles_charts, name="singles_charts"),
+    path("bwfapi/", include("BWFAPI.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

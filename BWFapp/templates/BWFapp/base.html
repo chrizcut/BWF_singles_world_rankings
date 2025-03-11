@@ -41,72 +41,8 @@
     {{ female_countries_counter|json_script:'female_countries_counter' }}
     {{ male_countries_counter|json_script:'male_countries_counter' }}
     <script src="{% static 'BWFapp/charts.js' %}"></script>
-    
-
-
-    <!-- <script>
-        const ctx = document.getElementById('womensPieChart');
-        var female_countries = JSON.parse(document.getElementById('female_countries_counter').textContent);
-        var all_countries = JSON.parse(document.getElementById('list_countries').textContent);
-        let countryColors = generateColors(all_countries.length);
-        let countryColorMap = {};
-        all_countries.forEach((country, index) => {
-            countryColorMap[country] = countryColors[index]; // Assign each country a fixed color
-        });
-        let female_backgroundColors = Object.keys(female_countries).map(country => countryColorMap[country]);
-
-        new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: Object.keys(female_countries),
-            datasets: [{
-                // label: '# of Votes',
-                data: Object.values(female_countries),
-                backgroundColor: female_backgroundColors,
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-            y: {
-                beginAtZero: true
-            }
-            }
-        }
-        });
-    </script>
-
-    <script>
-        const cty = document.getElementById('mensPieChart');
-        var male_countries = JSON.parse(document.getElementById('male_countries_counter').textContent);
-        var all_countries = JSON.parse(document.getElementById('list_countries').textContent);
-        countryColorMap = {};
-        all_countries.forEach((country, index) => {
-            countryColorMap[country] = countryColors[index]; // Assign each country a fixed color
-        });
-        let male_backgroundColors = Object.keys(male_countries).map(country => countryColorMap[country]);
-
-
-        new Chart(cty, {
-        type: 'pie',
-        data: {
-            labels: Object.keys(male_countries),
-            datasets: [{
-                // label: '# of Votes',
-                data: Object.values(male_countries),
-                backgroundColor: male_backgroundColors,
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-            y: {
-                beginAtZero: true
-            }
-            }
-        }
-        });
-    </script> -->
+    {{ players_list|json_script:'players' }}
+    <script src="{% static 'BWFapp/filter.js' %}"></script>
 
   </body>
 </html>

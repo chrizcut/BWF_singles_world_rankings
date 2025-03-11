@@ -4,9 +4,12 @@ from selenium.webdriver.support.select import Select
 import time
 import re
 import requests
+import datetime
 
 import os
 import django
+from django.core.management import call_command
+
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "BWFsite.settings")
 django.setup()
@@ -15,15 +18,17 @@ from BWFapp.models import FemaleSinglePlayer, MaleSinglePlayer
 
 
 URL_males = (
-    "https://www.tournamentsoftware.com/ranking/category.aspx?id=44780&category=472"
+    "https://www.tournamentsoftware.com/ranking/category.aspx?id=44877&category=472"
 )
 URL_females = (
-    "https://www.tournamentsoftware.com/ranking/category.aspx?id=44780&category=473"
+    "https://www.tournamentsoftware.com/ranking/category.aspx?id=44877&category=473"
 )
 
 # options = webdriver.ChromeOptions()
 # options.add_experimental_option("detach", True)
 # driver = webdriver.Chrome(options=options)
+
+call_command("flush", interactive=False)
 
 
 def scrape_players(URL, male):
@@ -50,14 +55,26 @@ def scrape_players(URL, male):
     select = Select(select_element)
     select.select_by_value("100")
 
+    rankings_date_tmp = list(
+        map(
+            int,
+            driver.find_element(
+                By.XPATH,
+                '//*[@id="cphPage_cphPage_cphPage_dlPublication_chosen"]/a/span',
+            ).text.split("/"),
+        )
+    )
+    rankings_date = datetime.date(
+        rankings_date_tmp[2], rankings_date_tmp[0], rankings_date_tmp[1]
+    )
     list_players = driver.find_elements(By.XPATH, f'//*[@id="content"]/table/tbody/tr')[
         2:-1
     ]
 
-    if male == True:
-        MaleSinglePlayer.objects.all().delete()
-    else:
-        FemaleSinglePlayer.objects.all().delete()
+    # if male == True:
+    #     MaleSinglePlayer.objects.all().delete()
+    # else:
+    #     FemaleSinglePlayer.objects.all().delete()
 
     for p in list_players:
         list_data = p.find_elements(By.TAG_NAME, "td")
@@ -83,6 +100,7 @@ def scrape_players(URL, male):
                 first_name=first_name,
                 last_name=last_name,
                 rank=rank,
+                date=rankings_date,
                 country=country,
                 country_image=f"media/country_images/{src[-7:-4]}.svg",
                 nb_tournaments=nb_tournaments,
@@ -93,6 +111,7 @@ def scrape_players(URL, male):
                 first_name=first_name,
                 last_name=last_name,
                 rank=rank,
+                date=rankings_date,
                 country=country,
                 nb_tournaments=nb_tournaments,
                 country_image=f"media/country_images/{src[-7:-4]}.svg",
