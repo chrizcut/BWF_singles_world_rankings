@@ -2,12 +2,14 @@ function generateColors(count) {
     let colors = [];
     for (let i = 0; i < count; i++) {
         let hue = (i * 360 / count) % 360; // Spread hues evenly around the color wheel
-        let saturation = 70; // Keep saturation constant for vivid colors
-        let lightness = 50; // Adjust lightness if needed (e.g., 40-60 for contrast)
+        let saturation = 50 + Math.random() * 50; // Keep saturation constant for vivid colors
+        let lightness = 45+ Math.random() * 10; // Adjust lightness if needed (e.g., 40-60 for contrast)
         colors.push(`hsl(${hue}, ${saturation}%, ${lightness}%)`);
     }
     return colors;
 }
+
+
 
 // document.addEventListener("DOMContentLoaded", function () {
 const ctx = document.getElementById('womensPieChart');
@@ -22,6 +24,8 @@ let countryColorMap = {};
 all_countries.forEach((country, index) => {
     countryColorMap[country] = countryColors[index]; // Assign each country a fixed color
 });
+
+console.log(countryColorMap)
 
 let female_backgroundColors = Object.keys(female_countries).map(country => countryColorMap[country]);
 let male_backgroundColors = Object.keys(male_countries).map(country => countryColorMap[country]);
@@ -42,6 +46,9 @@ options: {
         title: {
             display: true,
             text: "Number of women's singles players per country"
+        },
+        legend: {
+           reverse: true,
         }
     }
 }
@@ -65,6 +72,9 @@ options: {
         title: {
             display: true,
             text: "Number of men's singles players per country"
+        },
+        legend: {
+            reverse: true,
         }
     }
 }
