@@ -16,13 +16,7 @@ django.setup()
 
 from BWFapp.models import FemaleSinglePlayer, MaleSinglePlayer
 
-
-URL_males = (
-    "https://www.tournamentsoftware.com/ranking/category.aspx?id=44877&category=472"
-)
-URL_females = (
-    "https://www.tournamentsoftware.com/ranking/category.aspx?id=44877&category=473"
-)
+URL_BWF = "https://www.tournamentsoftware.com/ranking/ranking.aspx?rid=70"
 
 # options = webdriver.ChromeOptions()
 # options.add_experimental_option("detach", True)
@@ -50,6 +44,16 @@ def scrape_players(URL, male):
     consent_button.click()
 
     time.sleep(3)
+
+    if male == True:
+        target = driver.find_element(
+            By.XPATH, '//*[@id="content"]/table/tbody/tr[1]/th[1]/a'
+        )
+    else:
+        target = driver.find_element(
+            By.XPATH, '//*[@id="content"]/table/tbody/tr[15]/th[1]/a'
+        )
+    target.click()
 
     select_element = driver.find_element(By.ID, "_pagesize")
     select = Select(select_element)
@@ -120,5 +124,6 @@ def scrape_players(URL, male):
     driver.close()
 
 
-scrape_players(URL_males, True)
-scrape_players(URL_females, False)
+if __name__ == "__main__":
+    scrape_players(URL_BWF, True)
+    scrape_players(URL_BWF, False)
