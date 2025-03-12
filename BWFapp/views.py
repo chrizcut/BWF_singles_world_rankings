@@ -28,6 +28,7 @@ def womens_singles(request):
         request,
         "BWFapp/singles.html",
         {
+            "male": False,
             "players": female_players,
             "players_list": list_female_players,
             "date": date,
@@ -53,6 +54,7 @@ def mens_singles(request):
         request,
         "BWFapp/singles.html",
         {
+            "male": True,
             "players": male_players,
             "players_list": list_male_players,
             "date": date,

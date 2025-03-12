@@ -2,47 +2,53 @@
 
 <img src="media\2012_BWF_logo.png" width="400" alt="BWF logo">
 
-An application that both displays the top 100 men's and women's singles badminton players and serves as an API to retrieve these two lists.
+An application that both displays the most recent top 100 men's and women's singles badminton players and serves as an API to retrieve these two lists.
 
-The application is available at this address:
+The website is available at this address:
 
-https://recipe-book-5bl4.onrender.com/index/
+https://bwf-singles-world-rankings.onrender.com/.
 
 Please wait one minute while the instance restarts.
 
-## Description
+## Description of the website
 
-1. When users are not logged in, they only have access to the homepage and the login and registration pages.
+1. The most recent top 100 women's and men's singles players are displayed in a table.
 
-<img src="Screenshots/Login.png" width="400" alt="Login page">
-<img src="Screenshots/Register.png" width="400" alt="Registration page">
+<img src="media/Screenshots/List_womens_singles.png" width="600" alt="List of the top 100 women's singles players">
 
-2. Once a user has logged in, they can add a recipe with as many ingredients and steps as needed.
+2. This table can be filtered by country.
 
-<img src="Screenshots/Add_recipe.png" width="800" alt="Adding a recipe">
+<img src="media/Screenshots/List_chinese_womens_singles.png" width="600" alt="List of the Chinese women's singles players in the top 100">
 
-3. They can then access to the list of their recipes.
+3. Pie charts show the number of players per country in each top 100.
 
-<img src="Screenshots/List_recipes.png" width="800" alt="List of recipes">
+<img src="media\Screenshots\Singles_charts.png" width="600" alt="Pie charts of the number of players per country in each top 100">
 
-4. Recipes can be edited or deleted.
+## Description of the API
 
-<img src="Screenshots/Edit_recipe.png" width="400" alt="Edit a recipe">
-<img src="Screenshots/Delete_recipe.png" width="400" alt="Delete a recipe">
+The API is accessible at this address:
 
-5. Finally, users can delete their account.
+https://bwf-singles-world-rankings.onrender.com/bwfapi/.
 
-<img src="Screenshots/Delete_user.png" width="800" alt="Delete account">
+1. To retrieve the list of the top 100 women's singles players, use the endpoint: womens_singles/.
 
-## Database diagram
+<img src="media\Screenshots\API_list_womens_singles.png" width="600" alt="Retrieve the list of the top 100 women's singles players with the API">
 
-Here is how the database is organized:
+Similarly, the list of the top 100 men's singles players has the endpoint mens_singles/.
 
-<img src="Screenshots/DBDiagram.png" width="600" alt="Database diagram">
+2. To get the player at rank i, add i to the former endpoint.
+
+<img src="media\Screenshots\API_rank_womens_singles.png" width="600" alt="Retrieve the player with rank i with the API">
+
+
+## Database
+
+The database simply contains 2 tables : FemaleSinglePlayer and MaleSinglePlayer. They both have the same fields: rank, first_name, last_name, date (of the displayed rankings), country, country_image, nb_tournaments and points.
+
 
 ## Technologies used
 
-- Flask (Flask-Login, Flask-SQLALchemy, Flask-WTF)
-- JavaScript (for the buttons to add/remove ingredients/steps when adding a recipe)
-- Databases
-- CRUD operations
+- Django and Django REST framework
+- JavaScript (to filter the players by country)
+- Bootstrap
+- Selenium (to scrape tournamentsoftware)

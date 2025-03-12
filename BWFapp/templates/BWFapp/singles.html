@@ -3,6 +3,11 @@
 {% block content %}
 <div class="container">
   <h1>BWF world rankings on {{ date }}</h1>
+    {% if male %}
+    <h2>Men's singles</h2>
+    {% else %}
+    <h2>Women's singles</h2>
+    {% endif %}
     <div class="row">
       Filter by country:
       <div class="col-md-6">
