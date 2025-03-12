@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-w12xy!&tjxfk2tdwn5i&nv$)54b(a0^g+ff=x5$q@qn_^z0byr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["bwf-singles-world-rankings.onrender.com"]
 
 
 # Application definition
