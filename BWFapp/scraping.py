@@ -22,12 +22,19 @@ URL_BWF = "https://www.tournamentsoftware.com/ranking/ranking.aspx?rid=70"
 # options.add_experimental_option("detach", True)
 # driver = webdriver.Chrome(options=options)
 
+
 call_command("flush", interactive=False)
 
 
 def scrape_players(URL, male):
     driver = webdriver.Chrome()
     driver.get(URL)
+    driver.add_cookie(
+        {
+            "name": "euconsent-v2",
+            "value": "CQPftcAQPftcADsACAENBkFkAP_gAEPgAAhoK_tX_G__bWlr8T73aftkeY1P99h77sQxBgbJE-4FzLvW_JwXx2E5NAz6tqIKmRIAu3TBIQNlHJDURVCgaogVrSDMaEyUoTNKJ6BkiFMRI2dYCFxvm4tjeQCY5vr991cx2B-t7dr83dzyy4hHn3a5_2S1WJCdAYetDfv8bROb-9IOd_x8v4v4_F7pE2-eS1l_pWvp7D9-Yts_9X299_bbff5Pn__ul_-_X_vf_n37v943iCvgBJhoVEEZYEgIRKBhBAgBUFYQEUCAIAAEgaICAEwYFOQMAF1hIgBACgAGCAEAAIMAAQAAAQAIRABQAUCAACAQKAAMACAYCAAgYAAQAWAgEAAIDoGKYEEAgWACRmRQaYEoACQQEtlQgkAQIK4QhFngEACImCgAAAAAKAABAeCwOJJASoSCALiCaAAAgAACCBAoQScmAAIAzZag8GT6MrTAMHzBIgpgGQBEEZCQaEJvWkAA.YAAAAAAAAAAA",
+        }
+    )
 
     time.sleep(3)
 
@@ -35,13 +42,6 @@ def scrape_players(URL, male):
         By.XPATH, "/html/body/div/div/div/main/form/div[1]/button[1]"
     )
     cookie_button.click()
-
-    time.sleep(3)
-
-    consent_button = driver.find_element(
-        By.XPATH, '//*[@id="bdBase"]/div/div[2]/div[2]/div[2]/div[2]/button[2]'
-    )
-    consent_button.click()
 
     time.sleep(3)
 
